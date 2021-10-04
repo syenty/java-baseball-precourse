@@ -29,6 +29,21 @@ public class ValidationUtil {
   }
 
   /**
+   * 입력한 텍스트가 게임을 다시 시작하는 조건에 부합하는지 확인
+   * @param answer 사용자가 입력한 넥스트
+   * @return 해당 조건에 부합할 경우 true, 아닐 경우 false
+   */
+  public static boolean validateAgainAnswer(final String answer) {
+
+    if (!answer.equals("1") && !answer.equals("2")) {
+      System.out.println("[ERROR] 잘못된 입력입니다. 다시 입력해주세요.");
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
    * 배열 안에 중복되는 숫자가 있는지 확인
    * 진행 중인 index를 확인해 0일 경우 반드시 false를 return (index가 0일 경우 중복이 일어날 수 없다.)
    * @param array 대상 배열

@@ -1,5 +1,8 @@
 package baseball.utils;
 
+import baseball.Application;
+
+import nextstep.utils.Console;
 import nextstep.utils.Randoms;
 
 public class GameUtil {
@@ -34,7 +37,37 @@ public class GameUtil {
 
     System.out.println(getResultMessage(strikeCount, ballCount));
 
+    if (strikeCount == 3) {
+      System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+      return checkFinish();
+    }
+
     return false;
+  }
+
+  /**
+   * 사용자의 입력값에 따라 게임을 재개하기 위한 메서드
+   * @return 재개할 시 false 아닐 시 true
+   */
+  public static boolean checkFinish() {
+
+    String answer;
+
+    System.out.println("게임을 새로 시작 하려면 1, 종료하려면 2를 눌러주세요.");
+    answer = Console.readLine();
+
+    while (!ValidationUtil.validateAgainAnswer(answer)) {
+      System.out.println("게임을 새로 시작 하려면 1, 종료하려면 2를 눌러주세요.");
+      answer = Console.readLine();
+    }
+
+    if (answer.equals("1")) {
+      resetArray(Application.computerArray);
+      setRandomArray(Application.computerArray);
+      return false;
+    }
+
+    return true;
   }
 
   /**
@@ -69,6 +102,16 @@ public class GameUtil {
     } while(ValidationUtil.isDuplicateNumberInArray(array, number, index));
 
     return number;
+  }
+
+  /**
+   * 배열 안의 값들을 0으로 초기화
+   * @param array 초기화할 배열
+   */
+  public static void resetArray(final int[] array) {
+    for(int i=0; i<array.length; i++) {
+      array[i] = 0;
+    }
   }
 
   /**
