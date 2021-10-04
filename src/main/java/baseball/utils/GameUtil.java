@@ -62,7 +62,6 @@ public class GameUtil {
         }
 
         if (answer.equals("1")) {
-            resetArray(Application.computerArray);
             setRandomArray(Application.computerArray);
             return false;
         }
@@ -79,6 +78,8 @@ public class GameUtil {
         if (array.length != 3) return;
 
         int index = 0;
+
+        GameUtil.resetArray(array);
 
         while (index < 3 && !ValidationUtil.hasNotZero(array)) {
             array[index] = getDistinctNumber(array, index);
