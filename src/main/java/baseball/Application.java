@@ -17,7 +17,7 @@ public class Application {
     System.out.print("숫자를 입력해주세요 : ");
     answer = Console.readLine();
 
-    while(!GameUtil.isFinish(computerArray, answer)) {
+    while (!GameUtil.isFinish(computerArray, answer)) {
       System.out.print("숫자를 입력해주세요 : ");
       answer = Console.readLine();
     }
