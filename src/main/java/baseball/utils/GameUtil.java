@@ -12,7 +12,7 @@ public class GameUtil {
    * 생성된 3자리 난수와 사용자가 입력한 값을 비교하고 결과를 출력한다
    * @param computerArray 게임 시작 시 생성된 3자리 난수
    * @param answer 사용자가 입력한 값
-   * @return
+   * @return 게임 종료일 시 true, 아닐 시 false
    */
   public static boolean isFinish(final int[] computerArray,
                                  final String answer) {
@@ -26,11 +26,9 @@ public class GameUtil {
       return false;
     }
 
-    for(int i=0; i<answer.length(); i++) {
-      playerArray[i] = Character.getNumericValue(answer.charAt(i));
-    }
+    setInputArray(playerArray, answer);
 
-    for(int i=0; i<playerArray.length; i++) {
+    for (int i = 0; i < playerArray.length; i++) {
       strikeCount += getStrikeCount(computerArray, playerArray[i], i);
       ballCount += getBallCount(computerArray, playerArray[i], i);
     }
@@ -47,7 +45,7 @@ public class GameUtil {
 
   /**
    * 사용자의 입력값에 따라 게임을 재개하기 위한 메서드
-   * @return 재개할 시 false 아닐 시 true
+   * @return 게임 종료 시 true, 재개할 시 false
    */
   public static boolean checkFinish() {
 
@@ -87,6 +85,21 @@ public class GameUtil {
   }
 
   /**
+   * 길이가 3인 배열과 사용자의 입력값을 받아, 문자열 내 3개의 문자로 배열로 만든다
+   * @param array 숫자를 담을 배열
+   * @param answer 사용자가 입력한 값
+   */
+  public static void setInputArray(final int[] array,
+                                   final String answer) {
+
+    if (array.length != 3 || answer.length() != 3) return;
+
+    for (int i = 0; i < answer.length(); i++) {
+      array[i] = Character.getNumericValue(answer.charAt(i));
+    }
+  }
+
+  /**
    * 배열을 확인해 중복되지 않는 숫자를 반환
    * @param array 대상 배열
    * @param index 숫자 입력을 진행 중인 index
@@ -109,7 +122,7 @@ public class GameUtil {
    * @param array 초기화할 배열
    */
   public static void resetArray(final int[] array) {
-    for(int i=0; i<array.length; i++) {
+    for (int i = 0; i < array.length; i++) {
       array[i] = 0;
     }
   }
